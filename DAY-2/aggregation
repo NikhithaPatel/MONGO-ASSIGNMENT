@@ -1,0 +1,42 @@
+mongoimport -d population -c zipcodes --file C:\Users\pnikhith\Downloads\zips.json
+
+mongoimport -d mongo_practice -c myRental --file C:\Users\prabhkot\Desktop\assignment.json
+
+db.zipcodes.find({$and:[{city:"ATLANTA"},{state:"GA"}]})
+
+db.zipcodes.aggregate({$match:{city:"ATLANTA",state:"GA"}})
+
+db.zipcodes.aggregate({$group:{_id:{city:"ATLANTA"},count:{$sum:1}}})
+
+db.zipcodes.aggregate({$group:{_id:{city:"ATLANTA"},count:{$sum:"$pop"}}})
+
+
+
+
+
+db.zipcodes.aggregate({$group:{_id:{state:"$state"},count:{$sum:"$pop"}}})
+
+db.zipcodes.aggregate({$group:{_id:{state:"$state"},count:{$sum:"$pop"}}},{$sort:{count:-1}})
+
+db.zipcodes.aggregate({$group:{_id:{state:"$state"},count:{$sum:"$pop"}}},{$sort:{count:-1}},{$limit:3})
+
+
+
+
+
+db.zipcodes.aggregate({$group:{_id:{city: "$city",state:"$state"},count:{$sum:"$pop"}}})
+
+db.zipcodes.aggregate({$group:{_id:{city: "$city",state:"$state"},count:{$sum:"$pop"}}},{$sort:{count:-1}})
+
+db.zipcodes.aggregate({$group:{_id:{city: "$city",state:"$state"},count:{$sum:"$pop"}}},{$sort:{count:-1}},{$limit:3})
+
+db.zipcodes.aggregate({$group:{_id:{city: "$city",state:"TEXAS"},count:{$sum:"$pop"}}},{$sort:{count:-1}},{$limit:3})
+
+
+
+
+
+
+db.zipcodes.aggregate({$group:{_id:{state:"$state"},average:{$avg :"$pop"}}})
+
+db.zipcodes.aggregate({$group:{_id:{state:"$state"},average:{$avg :"$pop"}}},{$sort:{count:-1}},{$limit:3})
